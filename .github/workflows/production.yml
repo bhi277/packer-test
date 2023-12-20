@@ -28,8 +28,8 @@ jobs:
         with:
           version: ${{ env.packer_version }}
 
-      - name: "Packer init i"
-        run: packer init
+      - name: "Packer init"
+        run: packer init .
         working-directory: ./packer/
       
       - name: "Packer validate"
