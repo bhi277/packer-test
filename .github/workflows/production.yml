@@ -28,7 +28,8 @@ jobs:
       - name: "Packer init"
         run: packer init
         workking-directory: ./packer/
-        - name: "Packer validate"
+      
+      - name: "Packer validate"
         run: packer validate .
         working-directory: ./packer/
 
