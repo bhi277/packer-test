@@ -20,7 +20,10 @@ jobs:
 
     steps:
 
-      - name: "Clone the repo"
+      - name: "Repository Checkout"
+        uses: actions/checkout@v3
+
+      - name: "Packer Installation"
         uses: hashicorp/setup-packer@main
         with:
           version: ${{ env.packer_version }}
