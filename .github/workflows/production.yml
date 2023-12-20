@@ -28,7 +28,7 @@ jobs:
         with:
           version: ${{ env.packer_version }}
 
-      - name: "Packer init"
+      - name: "Packer init i"
         run: packer init
         working-directory: ./packer/
       
