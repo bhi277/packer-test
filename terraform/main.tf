@@ -17,7 +17,7 @@ data "aws_ami" "new_ami" {
 
 output "ami_id" {
 
-  value: data.aws_ami.new_ami.id
+  value = data.aws_ami.new_ami.id
 
 }
 
