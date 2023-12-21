@@ -47,7 +47,7 @@ jobs:
 
       - name: "List the directory"
         run: ls -la
-        bash: shell
+        shell: bash
 
       - name: "Terraform init"
         run: terraform init
