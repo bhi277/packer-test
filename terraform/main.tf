@@ -25,10 +25,5 @@ data "aws_ami" "newami" {
 
 }
 
-output "ami_id" {
-
-  value = data.aws_ami.newami.id
-
-}
 
 
