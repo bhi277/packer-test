@@ -32,13 +32,13 @@ jobs:
         run: packer init .
         working-directory: ./packer/
       
-        #- name: "Packer validate"
-        #run: packer validate .
-        #working-directory: ./packer/
+      - name: "Packer validate"
+        run: packer validate .
+        working-directory: ./packer/
 
-        #- name: "Packer build image"
-        #run: packer build .
-        #working-directory: ./packer/
+      - name: "Packer build image"
+        run: packer build .
+        working-directory: ./packer/
 
       - name: "Install terraform"
         uses: hashicorp/setup-terraform@v3
