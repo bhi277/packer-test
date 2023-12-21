@@ -1,30 +1,51 @@
-
 # ------------------------------------------
 # Fetch New AMI from AWS
 # ------------------------------------------
 
-data "aws_ami_ids" "newami" {
-
+data "aws_ami" "newami" {
   most_recent = true
-  owners = ["576000108196"]
- 
+  owners      = ["self"]
+  
   filter {
-    name   = "name"
-    values = ["amzn2-ami-hvm-*-x86_64-gp2"]
+    name   = "tag:project"
+    values = ["shopping"]
   }
 
   filter {
-    name   = "virtualization-type"
-    values = ["hvm"]
+    name   = "tag:env"
+    values = ["production"]
   }
-
-  filter {
-    name   = "root-device-type"
-    values = ["ebs"]
-  }
-
 
 }
 
+# -------------------------------------------- 
+# Fetched AMI id Output
+# ---------------------------------------------
+output "ami_id" {
 
+ value = data.aws_ami.newami.id
 
+}
+
+# ---------------------------------------------
+# Created a new Instce from the Ami
+# ---------------------------------------------
+
+resource "aws_instance" "web-new" {
+
+   ami  = data.aws_ami.newami.id
+   instance_type = "t2.micro"
+   key_name = "k8s_cluster_key"
+   vpc_security_group_ids = [ "sg-085d7c6d7d9dad773" ]
+
+   tags = {
+
+    Name = "Prodweb"
+
+}
+}   
+
+ output "instance-id" {
+
+  value = aws_instance.web-new.public_ip
+}
