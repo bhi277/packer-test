@@ -2,7 +2,7 @@
 # ------------------------------------------
 # Fetch New AMI from AWS
 # ------------------------------------------
-data "aws_ami" "new_ami" {
+data "aws_ami" "newami" {
 
   most_recent = true
   owners = ["576000108196"]
@@ -27,7 +27,7 @@ data "aws_ami" "new_ami" {
 
 output "ami_id" {
 
-  value = data.aws_ami.new_ami.id
+  value = data.aws_ami.newami.id
 
 }
 
