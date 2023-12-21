@@ -2,7 +2,8 @@
 # ------------------------------------------
 # Fetch New AMI from AWS
 # ------------------------------------------
-data "aws_ami" "newami" {
+
+data "aws_ami_ids" "newami" {
 
   most_recent = true
   owners = ["576000108196"]
