@@ -7,11 +7,10 @@ data "aws_ami" "new_ami" {
   most_recent = true
   owners = ["576000108196"]
 
-  source_ami_filter {
-    filters = {
+  filters = {
       name   = "source-ami-id"
       values = ["ami-02e94b011299ef128"]  # Replace with the source AMI ID you want to filter by
-    }
+    
   }
 }
 
