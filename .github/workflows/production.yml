@@ -1,6 +1,6 @@
 
 ---
-name: "Load a website using packer"
+name: "Load a website using packer with Prod"
 
 on:
   push:
@@ -12,9 +12,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      AWS_ACCESS_KEY_ID: ${{ secrets.ACCESS_KEY }}
-      AWS_SECRET_ACCESS_KEY: ${{ secrets.SECRET_KEY }}
-      AWS_DEFAULT_REGION: ${{ secrets.REGION }}
       packer_version: "1.9.4"
 
 
@@ -33,30 +30,15 @@ jobs:
         working-directory: ./packer/
       
       - name: "Packer validate"
-        run: packer validate .
+        run: packer validate -var-file="prod.pkrvars.hcl" .
         working-directory: ./packer/
 
       - name: "Packer build image"
-        run: packer build .
+        run: packer build -var-file="prod.pkrvars.hcl" .
         working-directory: ./packer/
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.PROD_ACCESS_KEY }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.PROD_SECRET_KEY }}
+          AWS_DEFAULT_REGION: ${{ secrets.PROD_REGION }}
 
-      - name: "Install terraform"
-        uses: hashicorp/setup-terraform@v3
-        with:
-          terraform_version: "1.1.7"
 
-      - name: "Terraform init"
-        run: terraform init
-        working-directory: ./terraform/
-
-      - name: "Terraform Validate"
-        run: terraform validate
-        working-directory: ./terraform/
-
-      - name: "Terraform paln"
-        run: terraform plan 
-        working-directory: ./terraform/
-
-      - name: "Terraform apply"
-        run: terraform apply -auto-approve
-        working-directory: ./terraform/

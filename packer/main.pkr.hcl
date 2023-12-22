@@ -1,3 +1,11 @@
+packer {
+  required_plugins {
+    amazon = {
+      version = ">= 1.2.9"
+      source  = "github.com/hashicorp/amazon"
+    }
+  }
+}
 source "amazon-ebs" "image" {
 
   ami_name = local.image-name
@@ -6,8 +14,8 @@ source "amazon-ebs" "image" {
   ssh_username = "ec2-user"
   tags = {
     Name = local.image-name
-    project = var.project
-    env =  var.env
+    project = var.project_name
+    env =  var.env_name
   }  
 
 }
