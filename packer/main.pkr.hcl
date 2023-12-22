@@ -15,7 +15,7 @@ source "amazon-ebs" "image" {
   tags = {
     Name = local.image-name
     project = var.project_name
-    env =  var.env_name
+    env =  var.project_env
   }  
 
 }
